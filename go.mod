@@ -1,3 +1,3 @@
-module brainf_implementation
+module vbproger/brainf_implementation
 
 go 1.18
