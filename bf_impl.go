@@ -6,12 +6,14 @@ import (
   "bufio"
 )
 
+const MEMORY_SIZE = 30000
+
 func unsupported(pos int, op string) error {
   return fmt.Errorf("operation unsupported at pos %d: %s", pos, op)
 }
 
-func parse(b []byte) ([30000]int, error){
-  var mem [30000]int
+func parse(b []byte) ([MEMORY_SIZE]int, error){
+  var mem [MEMORY_SIZE]int
   i := 0
   for idx, symbol := range b {
     if i >= len(mem) || i < 0 {

@@ -24,13 +24,13 @@ func TestParseNull(t *testing.T){
   }
 }
 func TestParseOutOfMemory(t *testing.T){
-  _, err := parse([]byte(strings.Repeat(">", 30000 + 1)))
+  _, err := parse([]byte(strings.Repeat(">", MEMORY_SIZE + 1)))
   if err == nil {
     t.Errorf("No error when running out of memory")
   }
 }
 func TestParseNegativePointer(t *testing.T){
-  _, err := parse([]byte(strings.Repeat("<", 30000 + 1)))
+  _, err := parse([]byte(strings.Repeat("<", MEMORY_SIZE + 1)))
   if err == nil {
     t.Errorf("Negative pointer allowed")
   }
