@@ -20,7 +20,7 @@ func parse(b []byte){
       case '-': mem[i] -= 1
       case '>': i += 1
       case '<': i -= 1
-      case '.': fmt.Printf("%v", string(mem[i]))
+      case '.': fmt.Printf("%s", string(rune(mem[i])))
       case ',': unsupported(idx, ",")
       case '[': unsupported(idx, "[")
       case ']': unsupported(idx, "]")
