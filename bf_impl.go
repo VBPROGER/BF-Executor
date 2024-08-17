@@ -8,7 +8,7 @@ import (
 )
 
 func unsupported(pos int, op string){
-  log.Fatalf("operation unsupported at pos %d: %s", pos)
+  log.Fatalf("operation unsupported at pos %d: %s", pos, op)
 }
 
 func parse(b []byte){
