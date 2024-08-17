@@ -21,7 +21,7 @@ func parse(b []byte){
       case '>': i += 1
       case '<': i -= 1
       case '.': fmt.Printf("%v", string(mem[i]))
-      case ',': fmt.Printf("indev")
+      case ',': unsupported(idx, ",")
       case '[': unsupported(idx, "[")
       case ']': unsupported(idx, "]")
       case '\n': // Newline encountered. Just ignore it.
