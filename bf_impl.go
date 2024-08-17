@@ -4,14 +4,13 @@ import (
   "fmt"
   "os"
   "bufio"
-  "log"
 )
 
-func unsupported(pos int, op string){
-  log.Fatalf("operation unsupported at pos %d: %s", pos, op)
+func unsupported(pos int, op string) error {
+  return fmt.Errorf("operation unsupported at pos %d: %s", pos, op)
 }
 
-func parse(b []byte){
+func parse(b []byte) ([30000]int, error){
   var mem [30000]int
   i := 0
   for idx, symbol := range b {
@@ -21,18 +20,22 @@ func parse(b []byte){
       case '>': i += 1
       case '<': i -= 1
       case '.': fmt.Printf("%s", string(rune(mem[i])))
-      case ',': unsupported(idx, ",")
-      case '[': unsupported(idx, "[")
-      case ']': unsupported(idx, "]")
+      case ',': return mem, unsupported(idx, ",")
+      case '[': return mem, unsupported(idx, "[")
+      case ']': return mem, unsupported(idx, "]")
       case '\n': // Newline encountered. Just ignore it.
       default:
-        log.Fatalf("unknown symbol encountered at pos %d: %s", idx, string(symbol))
+        return mem, fmt.Errorf("unknown symbol encountered at pos %d: %s", idx, string(rune(symbol)))
     }
   }
+  return mem, nil
 }
 
 func main(){
   reader := bufio.NewReader(os.Stdin)
   t, _ := reader.ReadBytes('\n')
-  parse(t)
+  _, err := parse(t)
+  if err != nil {
+    fmt.Println(err.Error())
+  }
 }
