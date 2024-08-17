@@ -39,6 +39,6 @@ func main(){
   t, _ := reader.ReadBytes('\n')
   _, err := parse(t)
   if err != nil {
-    fmt.Println(err.Error())
+    fmt.Printf("An error has occured while executing the script:\n%s\n", err.Error())
   }
 }
