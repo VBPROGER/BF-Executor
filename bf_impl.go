@@ -33,7 +33,11 @@ func parse(b []byte) ([MEMORY_SIZE]int, int, error, int){
       case '>': i += 1
       case '<': i -= 1
       case '.': fmt.Printf("%s", string(rune(mem[i])))
-      case ',': return mem, i, unsupported(","), idx
+      case ',':
+        scanner := bufio.NewScanner(os.Stdin)
+        if scanner.Scan(){
+          mem[i] = int(scanner.Text()[0])
+        }
       case '[': return mem, i, unsupported("["), idx
       case ']': return mem, i, unsupported("]"), idx
       case '\n': // Newline encountered. Just ignore it.
