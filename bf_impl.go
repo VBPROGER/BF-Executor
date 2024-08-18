@@ -14,10 +14,10 @@ func unsupported(op string) error {
   return fmt.Errorf("operation unsupported: %s", op)
 }
 
-func read(what byte)([]byte, error){
+func read(what byte)([]byte){
   reader := bufio.NewReader(os.Stdin)
-  bytes, error := reader.ReadBytes(what)
-  return bytes, error
+  bytes, _ := reader.ReadBytes(what)
+  return bytes
 }
 
 func parse(b []byte) ([MEMORY_SIZE]int, int, error, int){
@@ -45,7 +45,7 @@ func parse(b []byte) ([MEMORY_SIZE]int, int, error, int){
 }
 
 func main(){
-  t, _ := read('\n')
+  t := read('\n')
   _, i, err, pos := parse(t)
   if err != nil {
     log.Fatalf("Error at position %d in slot %d:\n%s\n", pos, i, err.Error())
